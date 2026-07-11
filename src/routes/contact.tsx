@@ -1,0 +1,100 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import { Section, SectionHeading, GradientButton } from "@/components/site/primitives";
+import { Mail, MapPin, Globe } from "lucide-react";
+
+export const Route = createFileRoute("/contact")({
+  head: () => ({
+    meta: [
+      { title: "Contact — ABM Dynamic Programs" },
+      { name: "description", content: "Start a project with ABM Dynamic Programs. Based in Hurghada, Egypt. Serving clients worldwide." },
+      { property: "og:title", content: "Contact — ABM Dynamic Programs" },
+      { property: "og:description", content: "Tell us about your project — we'll get back within one business day." },
+      { property: "og:url", content: "/contact" },
+    ],
+    links: [{ rel: "canonical", href: "/contact" }],
+  }),
+  component: ContactPage,
+});
+
+function ContactPage() {
+  const [sent, setSent] = useState(false);
+  return (
+    <>
+      <Section className="pt-20 pb-8 md:pt-28 md:pb-12">
+        <SectionHeading
+          eyebrow="Contact"
+          title="Let's talk about what you're building."
+          description="Send us a note about your project, your timeline, and the outcome you're after. We reply within one business day."
+        />
+      </Section>
+      <Section className="pt-0">
+        <div className="grid gap-8 md:grid-cols-5">
+          <div className="md:col-span-2 space-y-4">
+            <InfoRow icon={Mail} title="Email" value="hello@abm-programs.com" href="mailto:hello@abm-programs.com" />
+            <InfoRow icon={Globe} title="Website" value="abm-programs.com" href="https://abm-programs.com" />
+            <InfoRow icon={MapPin} title="Studio" value="Hurghada, Red Sea Governorate, Egypt" />
+          </div>
+          <form
+            className="md:col-span-3 rounded-2xl border border-white/10 bg-white/[0.03] p-8 backdrop-blur-xl"
+            onSubmit={(e) => { e.preventDefault(); setSent(true); }}
+          >
+            {sent ? (
+              <div className="py-12 text-center">
+                <h3 className="text-2xl font-semibold">Message received.</h3>
+                <p className="mt-3 text-muted-foreground">Thanks for reaching out — we'll be in touch shortly.</p>
+              </div>
+            ) : (
+              <div className="space-y-5">
+                <Field label="Your name" name="name" required />
+                <Field label="Email" name="email" type="email" required />
+                <Field label="Company" name="company" />
+                <Field label="Tell us about your project" name="message" textarea required />
+                <div className="pt-2">
+                  <button
+                    type="submit"
+                    className="inline-flex h-11 items-center justify-center rounded-full bg-[image:var(--gradient-primary)] px-6 text-sm font-medium text-primary-foreground shadow-[var(--shadow-elegant)] transition-transform hover:scale-[1.02]"
+                  >
+                    Send message →
+                  </button>
+                </div>
+              </div>
+            )}
+          </form>
+        </div>
+      </Section>
+    </>
+  );
+}
+
+function InfoRow({ icon: Icon, title, value, href }: {
+  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
+  title: string; value: string; href?: string;
+}) {
+  const inner = (
+    <div className="flex items-start gap-4 rounded-2xl border border-white/10 bg-white/[0.03] p-5 backdrop-blur-xl transition hover:border-white/20 hover:bg-white/[0.05]">
+      <Icon className="mt-0.5 h-5 w-5 text-primary" strokeWidth={1.5} />
+      <div>
+        <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">{title}</div>
+        <div className="mt-1 text-base text-foreground">{value}</div>
+      </div>
+    </div>
+  );
+  return href ? <a href={href}>{inner}</a> : inner;
+}
+
+function Field({ label, name, type = "text", textarea, required }: {
+  label: string; name: string; type?: string; textarea?: boolean; required?: boolean;
+}) {
+  const cls = "w-full rounded-lg border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/70 focus:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/30";
+  return (
+    <label className="block">
+      <span className="mb-2 block text-xs font-medium uppercase tracking-widest text-muted-foreground">{label}</span>
+      {textarea ? (
+        <textarea name={name} required={required} rows={5} className={cls} />
+      ) : (
+        <input name={name} type={type} required={required} className={cls} />
+      )}
+    </label>
+  );
+}
