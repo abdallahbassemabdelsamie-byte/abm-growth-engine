@@ -15,6 +15,7 @@ import {
   GlassCard,
   GradientButton,
 } from "@/components/site/primitives";
+import { useT } from "@/i18n/context";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -30,53 +31,51 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const highlights = [
-  { icon: Code2, title: "Custom engineering", copy: "Bespoke websites built on modern stacks — no templates, no compromises." },
-  { icon: Gauge, title: "Performance-first", copy: "Sub-second loads, perfect Core Web Vitals, engineered for scale." },
-  { icon: Search, title: "SEO by default", copy: "Semantic structure, technical SEO, and content that ranks." },
-  { icon: Palette, title: "Premium UI/UX", copy: "Design systems and interfaces that feel effortless to use." },
-  { icon: ShieldCheck, title: "Reliable delivery", copy: "Transparent process, honest timelines, long-term partnerships." },
-  { icon: Sparkles, title: "20+ years of craft", copy: "Two decades of shipping software for demanding clients." },
-];
-
-const industries = [
-  "Tourism", "Hotels & Hospitality", "Travel Agencies", "Healthcare",
-  "Real Estate", "Retail", "Restaurants & Cafés", "Education",
-  "Professional Services", "Startups", "Small Businesses", "Corporate",
+const highlightIcons = [Code2, Gauge, Search, Palette, ShieldCheck, Sparkles];
+const industryKeys = [
+  "industries.tourism","industries.hotels","industries.travel","industries.healthcare",
+  "industries.realestate","industries.retail","industries.restaurants","industries.education",
+  "industries.professional","industries.startups","industries.small","industries.corporate",
 ];
 
 function Index() {
+  const t = useT();
+  const highlights = highlightIcons.map((Icon, i) => ({
+    Icon,
+    title: t(`home.h${i + 1}.title`),
+    copy: t(`home.h${i + 1}.copy`),
+  }));
   return (
     <>
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div className="mx-auto max-w-7xl px-6 pt-24 pb-32 md:pt-40 md:pb-48">
           <div className="mx-auto max-w-4xl text-center">
-            <Eyebrow>Based in Hurghada · Serving worldwide</Eyebrow>
+            <Eyebrow>{t("home.eyebrow")}</Eyebrow>
             <h1 className="mt-6 text-5xl font-semibold tracking-tight md:text-7xl">
-              Engineering digital{" "}
+              {t("home.hero.p1")}{" "}
               <span className="bg-[image:var(--gradient-primary)] bg-clip-text text-transparent">
-                solutions
+                {t("home.hero.p2")}
               </span>{" "}
-              that drive growth.
+              {t("home.hero.p3")}
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground md:text-xl">
-              We design and build modern, high-performance websites and digital products for businesses that measure success in outcomes — not pageviews.
+              {t("home.hero.sub")}
             </p>
             <div className="mt-10 flex flex-wrap justify-center gap-3">
               <GradientButton to="/contact">
-                Start a project <ArrowRight className="ml-2 h-4 w-4" />
+                {t("home.hero.cta1")} <ArrowRight className="ml-2 h-4 w-4" />
               </GradientButton>
               <GradientButton to="/services" variant="ghost">
-                Explore services
+                {t("home.hero.cta2")}
               </GradientButton>
             </div>
             <div className="mt-16 flex flex-wrap items-center justify-center gap-x-10 gap-y-3 text-xs uppercase tracking-widest text-muted-foreground">
-              <span>20+ years experience</span>
+              <span>{t("home.hero.tag1")}</span>
               <span className="h-1 w-1 rounded-full bg-white/20" />
-              <span>Next.js · React · TypeScript</span>
+              <span>{t("home.hero.tag2")}</span>
               <span className="h-1 w-1 rounded-full bg-white/20" />
-              <span>Fame Makers · Marketing division</span>
+              <span>{t("home.hero.tag3")}</span>
             </div>
           </div>
         </div>
@@ -85,14 +84,14 @@ function Index() {
       {/* Highlights */}
       <Section>
         <SectionHeading
-          eyebrow="Why ABM"
-          title="A studio built for outcomes."
-          description="We combine engineering discipline with design taste to ship digital products that perform in the real world."
+          eyebrow={t("home.why.eyebrow")}
+          title={t("home.why.title")}
+          description={t("home.why.desc")}
         />
         <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {highlights.map((h) => (
             <GlassCard key={h.title}>
-              <h.icon className="h-6 w-6 text-primary" strokeWidth={1.5} />
+              <h.Icon className="h-6 w-6 text-primary" strokeWidth={1.5} />
               <h3 className="mt-5 text-lg font-semibold">{h.title}</h3>
               <p className="mt-2 text-sm text-muted-foreground">{h.copy}</p>
             </GlassCard>
@@ -104,26 +103,26 @@ function Index() {
       <Section>
         <div className="grid gap-12 md:grid-cols-2 md:items-end">
           <SectionHeading
-            eyebrow="Services"
-            title="Every layer of your digital presence."
-            description="From strategy and interface design to engineering, launch, and long-term maintenance — one accountable team, end to end."
+            eyebrow={t("home.svc.eyebrow")}
+            title={t("home.svc.title")}
+            description={t("home.svc.desc")}
           />
           <div className="md:text-right">
-            <GradientButton to="/services" variant="ghost">See all services →</GradientButton>
+            <GradientButton to="/services" variant="ghost">{t("home.svc.all")}</GradientButton>
           </div>
         </div>
         <div className="mt-14 grid gap-4 md:grid-cols-3">
           {[
-            ["Custom Websites", "Marketing sites and business platforms engineered for scale."],
-            ["E-commerce", "Storefronts that convert — fast, accessible, and easy to manage."],
-            ["UI / UX Design", "Design systems and interfaces that respect your users' time."],
-            ["SEO & Performance", "Technical SEO, Core Web Vitals, and content that ranks."],
-            ["Cloud Hosting", "Global edge deployment with zero-downtime releases."],
-            ["Fame Makers", "Our marketing division for Google Ads, Meta, and growth."],
-          ].map(([t, d]) => (
-            <GlassCard key={t}>
-              <h3 className="text-base font-semibold">{t}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{d}</p>
+            ["home.svc.web.t", "home.svc.web.d"],
+            ["home.svc.ecom.t", "home.svc.ecom.d"],
+            ["home.svc.uiux.t", "home.svc.uiux.d"],
+            ["home.svc.seo.t", "home.svc.seo.d"],
+            ["home.svc.cloud.t", "home.svc.cloud.d"],
+            ["home.svc.fame.t", "home.svc.fame.d"],
+          ].map(([tk, dk]) => (
+            <GlassCard key={tk}>
+              <h3 className="text-base font-semibold">{t(tk)}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{t(dk)}</p>
             </GlassCard>
           ))}
         </div>
@@ -133,15 +132,15 @@ function Index() {
       <Section className="py-20 md:py-24">
         <div className="rounded-3xl border border-white/10 bg-white/[0.02] p-10 backdrop-blur-xl">
           <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-            Trusted across industries
+            {t("home.ind.title")}
           </div>
           <div className="mt-6 flex flex-wrap gap-2">
-            {industries.map((i) => (
+            {industryKeys.map((k) => (
               <span
-                key={i}
+                key={k}
                 className="rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm text-muted-foreground"
               >
-                {i}
+                {t(k)}
               </span>
             ))}
           </div>
@@ -157,14 +156,14 @@ function Index() {
             style={{ background: "radial-gradient(ellipse at center, oklch(0.62 0.22 275 / 0.3), transparent 70%)" }}
           />
           <h2 className="text-4xl font-semibold tracking-tight md:text-5xl">
-            Let's build something enduring.
+            {t("home.cta.title")}
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-            Tell us about your product, your customers, and where you want to be a year from now.
+            {t("home.cta.desc")}
           </p>
           <div className="mt-8 flex justify-center gap-3">
-            <GradientButton to="/contact">Start a project</GradientButton>
-            <GradientButton to="/process" variant="ghost">See our process</GradientButton>
+            <GradientButton to="/contact">{t("home.cta.b1")}</GradientButton>
+            <GradientButton to="/process" variant="ghost">{t("home.cta.b2")}</GradientButton>
           </div>
         </div>
       </Section>

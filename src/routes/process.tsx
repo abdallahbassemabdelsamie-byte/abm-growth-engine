@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Section, SectionHeading } from "@/components/site/primitives";
+import { useT } from "@/i18n/context";
 
 export const Route = createFileRoute("/process")({
   head: () => ({
@@ -15,36 +16,27 @@ export const Route = createFileRoute("/process")({
   component: ProcessPage,
 });
 
-const steps = [
-  ["Discovery & Consultation", "We start with your business, your customers, and the outcomes that matter. No jargon, no guesswork."],
-  ["Planning & Strategy", "Scope, sitemap, technical approach, and success metrics — agreed in writing before a single pixel moves."],
-  ["UI / UX Design", "Interfaces designed around real user tasks, with a design system that scales beyond the launch."],
-  ["Website Development", "Modern engineering on Next.js, React, and TypeScript — clean, typed, testable, and built to last."],
-  ["SEO & Performance Optimization", "Technical SEO, structured data, image pipelines, and Core Web Vitals tuning baked in from day one."],
-  ["Testing & Quality Assurance", "Cross-device, cross-browser, accessibility, and performance audits before anything ships."],
-  ["Launch & Deployment", "Zero-downtime release to global edge infrastructure with monitoring and rollbacks configured."],
-  ["Ongoing Maintenance & Support", "Proactive updates, security patches, and iterative improvements — your site keeps getting better."],
-];
-
 function ProcessPage() {
+  const t = useT();
+  const steps = Array.from({ length: 8 }, (_, i) => i + 1);
   return (
     <>
       <Section className="pt-20 pb-8 md:pt-28 md:pb-12">
         <SectionHeading
-          eyebrow="Process"
-          title="A predictable path from idea to production."
-          description="We've refined this over 20+ years of shipping software. Every step exists because skipping it costs more later."
+          eyebrow={t("process.eyebrow")}
+          title={t("process.title")}
+          description={t("process.desc")}
         />
       </Section>
       <Section className="pt-0">
         <ol className="relative border-l border-white/10 pl-8 md:pl-12">
-          {steps.map(([title, copy], i) => (
-            <li key={title} className="relative pb-14 last:pb-0">
+          {steps.map((n, i) => (
+            <li key={n} className="relative pb-14 last:pb-0">
               <span className="absolute -left-[41px] md:-left-[49px] top-0 grid h-8 w-8 place-items-center rounded-full border border-white/15 bg-background text-xs font-semibold text-primary shadow-[var(--shadow-glow)]">
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <h3 className="text-2xl font-semibold tracking-tight md:text-3xl">{title}</h3>
-              <p className="mt-3 max-w-2xl text-base text-muted-foreground md:text-lg">{copy}</p>
+              <h3 className="text-2xl font-semibold tracking-tight md:text-3xl">{t(`process.s${n}.t`)}</h3>
+              <p className="mt-3 max-w-2xl text-base text-muted-foreground md:text-lg">{t(`process.s${n}.d`)}</p>
             </li>
           ))}
         </ol>
