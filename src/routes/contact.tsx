@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Section, SectionHeading, GradientButton } from "@/components/site/primitives";
 import { Mail, MapPin, Globe } from "lucide-react";
+import { useT } from "@/i18n/context";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -19,21 +20,22 @@ export const Route = createFileRoute("/contact")({
 
 function ContactPage() {
   const [sent, setSent] = useState(false);
+  const t = useT();
   return (
     <>
       <Section className="pt-20 pb-8 md:pt-28 md:pb-12">
         <SectionHeading
-          eyebrow="Contact"
-          title="Let's talk about what you're building."
-          description="Send us a note about your project, your timeline, and the outcome you're after. We reply within one business day."
+          eyebrow={t("contact.eyebrow")}
+          title={t("contact.title")}
+          description={t("contact.desc")}
         />
       </Section>
       <Section className="pt-0">
         <div className="grid gap-8 md:grid-cols-5">
           <div className="md:col-span-2 space-y-4">
-            <InfoRow icon={Mail} title="Email" value="hello@abm-programs.com" href="mailto:hello@abm-programs.com" />
-            <InfoRow icon={Globe} title="Website" value="abm-programs.com" href="https://abm-programs.com" />
-            <InfoRow icon={MapPin} title="Studio" value="Hurghada, Red Sea Governorate, Egypt" />
+            <InfoRow icon={Mail} title={t("contact.email")} value="hello@abm-programs.com" href="mailto:hello@abm-programs.com" />
+            <InfoRow icon={Globe} title={t("contact.website")} value="abm-programs.com" href="https://abm-programs.com" />
+            <InfoRow icon={MapPin} title={t("contact.studio")} value={t("contact.studio.value")} />
           </div>
           <form
             className="md:col-span-3 rounded-2xl border border-white/10 bg-white/[0.03] p-8 backdrop-blur-xl"
@@ -41,21 +43,21 @@ function ContactPage() {
           >
             {sent ? (
               <div className="py-12 text-center">
-                <h3 className="text-2xl font-semibold">Message received.</h3>
-                <p className="mt-3 text-muted-foreground">Thanks for reaching out — we'll be in touch shortly.</p>
+                <h3 className="text-2xl font-semibold">{t("contact.sent.t")}</h3>
+                <p className="mt-3 text-muted-foreground">{t("contact.sent.d")}</p>
               </div>
             ) : (
               <div className="space-y-5">
-                <Field label="Your name" name="name" required />
-                <Field label="Email" name="email" type="email" required />
-                <Field label="Company" name="company" />
-                <Field label="Tell us about your project" name="message" textarea required />
+                <Field label={t("contact.f.name")} name="name" required />
+                <Field label={t("contact.f.email")} name="email" type="email" required />
+                <Field label={t("contact.f.company")} name="company" />
+                <Field label={t("contact.f.msg")} name="message" textarea required />
                 <div className="pt-2">
                   <button
                     type="submit"
                     className="inline-flex h-11 items-center justify-center rounded-full bg-[image:var(--gradient-primary)] px-6 text-sm font-medium text-primary-foreground shadow-[var(--shadow-elegant)] transition-transform hover:scale-[1.02]"
                   >
-                    Send message →
+                    {t("contact.submit")}
                   </button>
                 </div>
               </div>

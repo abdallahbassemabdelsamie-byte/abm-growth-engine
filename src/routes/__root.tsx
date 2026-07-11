@@ -15,6 +15,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { DottedSurface } from "@/components/DottedSurface";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { I18nProvider } from "@/i18n/context";
 
 function NotFoundComponent() {
   return (
@@ -126,9 +127,10 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ClientOnly fallback={null}>
+      <I18nProvider>
+        <ClientOnly fallback={null}>
         <DottedSurface />
-      </ClientOnly>
+        </ClientOnly>
       <div
         aria-hidden
         className="pointer-events-none fixed inset-0 -z-10"
@@ -145,6 +147,7 @@ function RootComponent() {
         </main>
         <Footer />
       </div>
+      </I18nProvider>
     </QueryClientProvider>
   );
 }

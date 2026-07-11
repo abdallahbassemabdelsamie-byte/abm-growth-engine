@@ -4,6 +4,7 @@ import {
   Plane, Hotel, Compass, HeartPulse, Building2, ShoppingBag,
   Coffee, GraduationCap, Briefcase, Store, Rocket, Building,
 } from "lucide-react";
+import { useT } from "@/i18n/context";
 
 export const Route = createFileRoute("/industries")({
   head: () => ({
@@ -19,37 +20,38 @@ export const Route = createFileRoute("/industries")({
   component: IndustriesPage,
 });
 
-const items = [
-  [Plane, "Tourism"],
-  [Hotel, "Hotels & Hospitality"],
-  [Compass, "Travel Agencies"],
-  [HeartPulse, "Healthcare"],
-  [Building2, "Real Estate"],
-  [ShoppingBag, "Retail"],
-  [Coffee, "Restaurants & Cafés"],
-  [GraduationCap, "Education"],
-  [Briefcase, "Professional Services"],
-  [Store, "Small Businesses"],
-  [Rocket, "Startups"],
-  [Building, "Corporate Companies"],
-] as const;
+const items: [React.ComponentType<{ className?: string; strokeWidth?: number }>, string][] = [
+  [Plane, "industries.tourism"],
+  [Hotel, "industries.hotels"],
+  [Compass, "industries.travel"],
+  [HeartPulse, "industries.healthcare"],
+  [Building2, "industries.realestate"],
+  [ShoppingBag, "industries.retail"],
+  [Coffee, "industries.restaurants"],
+  [GraduationCap, "industries.education"],
+  [Briefcase, "industries.professional"],
+  [Store, "industries.small"],
+  [Rocket, "industries.startups"],
+  [Building, "industries.corporate"],
+];
 
 function IndustriesPage() {
+  const t = useT();
   return (
     <>
       <Section className="pt-20 pb-8 md:pt-28 md:pb-12">
         <SectionHeading
-          eyebrow="Industries"
-          title="Deep experience across sectors."
-          description="From boutique tourism operators to multi-brand corporates, we adapt our approach to the realities of your industry — regulation, seasonality, audience, and everything in between."
+          eyebrow={t("industries.eyebrow")}
+          title={t("industries.title")}
+          description={t("industries.desc")}
         />
       </Section>
       <Section className="pt-0">
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {items.map(([Icon, name]) => (
-            <GlassCard key={name}>
+          {items.map(([Icon, key]) => (
+            <GlassCard key={key}>
               <Icon className="h-6 w-6 text-primary" strokeWidth={1.5} />
-              <h3 className="mt-5 text-lg font-semibold">{name}</h3>
+              <h3 className="mt-5 text-lg font-semibold">{t(key)}</h3>
             </GlassCard>
           ))}
         </div>
