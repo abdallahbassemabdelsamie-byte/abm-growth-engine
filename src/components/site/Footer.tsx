@@ -1,7 +1,9 @@
 import { Link } from "@tanstack/react-router";
 import logo from "@/assets/abm-logo.png.asset.json";
+import { useT } from "@/i18n/context";
 
 export function Footer() {
+  const t = useT();
   return (
     <footer className="border-t border-white/5 bg-background/40 backdrop-blur-xl">
       <div className="mx-auto grid max-w-7xl gap-10 px-6 py-16 md:grid-cols-4">
@@ -11,37 +13,37 @@ export function Footer() {
             <span className="font-display text-base font-semibold">ABM Dynamic Programs</span>
           </div>
           <p className="mt-4 max-w-xs text-sm text-muted-foreground">
-            Engineering digital solutions that drive measurable business growth.
+            {t("footer.tagline")}
           </p>
           <p className="mt-4 text-xs text-muted-foreground">
-            Hurghada, Red Sea Governorate, Egypt
+            {t("footer.location")}
           </p>
         </div>
-        <FooterCol title="Company" links={[
-          { to: "/about", label: "About" },
-          { to: "/process", label: "Process" },
-          { to: "/industries", label: "Industries" },
-          { to: "/technologies", label: "Technologies" },
+        <FooterCol title={t("footer.company")} links={[
+          { to: "/about", label: t("nav.about") },
+          { to: "/process", label: t("nav.process") },
+          { to: "/industries", label: t("nav.industries") },
+          { to: "/technologies", label: t("nav.technologies") },
         ]} />
-        <FooterCol title="Services" links={[
-          { to: "/services", label: "Web Development" },
-          { to: "/services", label: "UI / UX Design" },
-          { to: "/services", label: "SEO & Performance" },
-          { to: "/services", label: "Fame Makers — Marketing" },
+        <FooterCol title={t("footer.services")} links={[
+          { to: "/services", label: t("footer.svc.web") },
+          { to: "/services", label: t("footer.svc.uiux") },
+          { to: "/services", label: t("footer.svc.seo") },
+          { to: "/services", label: t("footer.svc.fame") },
         ]} />
         <div>
-          <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Contact</div>
+          <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">{t("footer.contact")}</div>
           <ul className="mt-4 space-y-2 text-sm">
             <li><a href="mailto:hello@abm-programs.com" className="text-muted-foreground hover:text-foreground">hello@abm-programs.com</a></li>
             <li><a href="https://abm-programs.com" className="text-muted-foreground hover:text-foreground">abm-programs.com</a></li>
           </ul>
           <Link to="/contact" className="mt-4 inline-flex text-sm text-foreground underline underline-offset-4 decoration-primary/60 hover:decoration-primary">
-            Start a project →
+            {t("footer.cta")}
           </Link>
         </div>
       </div>
       <div className="border-t border-white/5 py-6 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} ABM Dynamic Programs. All rights reserved.
+        © {new Date().getFullYear()} ABM Dynamic Programs. {t("footer.rights")}
       </div>
     </footer>
   );

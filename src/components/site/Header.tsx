@@ -2,17 +2,20 @@ import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/abm-logo.png.asset.json";
+import { useT } from "@/i18n/context";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 const nav = [
-  { to: "/services", label: "Services" },
-  { to: "/process", label: "Process" },
-  { to: "/industries", label: "Industries" },
-  { to: "/technologies", label: "Technologies" },
-  { to: "/about", label: "About" },
+  { to: "/services", key: "nav.services" },
+  { to: "/process", key: "nav.process" },
+  { to: "/industries", key: "nav.industries" },
+  { to: "/technologies", key: "nav.technologies" },
+  { to: "/about", key: "nav.about" },
 ] as const;
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const t = useT();
   return (
     <header className="sticky top-0 z-40 border-b border-white/5 bg-background/60 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
@@ -28,25 +31,29 @@ export function Header() {
               className="text-sm text-muted-foreground transition-colors hover:text-foreground"
               activeProps={{ className: "text-foreground" }}
             >
-              {n.label}
+              {t(n.key)}
             </Link>
           ))}
         </nav>
-        <div className="hidden md:block">
+        <div className="hidden md:flex md:items-center md:gap-2">
+          <LanguageSwitcher />
           <Link
             to="/contact"
             className="inline-flex h-9 items-center rounded-full border border-white/10 bg-white/5 px-4 text-sm font-medium text-foreground transition hover:bg-white/10"
           >
-            Start a project →
+            {t("nav.cta")}
           </Link>
         </div>
-        <button
+        <div className="flex items-center gap-2 md:hidden">
+          <LanguageSwitcher />
+          <button
           className="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-md border border-white/10 bg-white/5"
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"
         >
           {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
-        </button>
+          </button>
+        </div>
       </div>
       {open && (
         <div className="border-t border-white/5 bg-background/90 backdrop-blur-xl md:hidden">
@@ -58,7 +65,7 @@ export function Header() {
                 onClick={() => setOpen(false)}
                 className="rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-white/5 hover:text-foreground"
               >
-                {n.label}
+                {t(n.key)}
               </Link>
             ))}
             <Link
@@ -66,7 +73,7 @@ export function Header() {
               onClick={() => setOpen(false)}
               className="mt-2 rounded-full bg-[image:var(--gradient-primary)] px-4 py-2 text-center text-sm font-medium text-primary-foreground"
             >
-              Start a project →
+              {t("nav.cta")}
             </Link>
           </div>
         </div>
