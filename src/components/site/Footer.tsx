@@ -1,12 +1,13 @@
 import { Link } from "@tanstack/react-router";
+import logo from "@/assets/abm-logo.png.asset.json";
 
 export function Footer() {
   return (
     <footer className="border-t border-white/5 bg-background/40 backdrop-blur-xl">
       <div className="mx-auto grid max-w-7xl gap-10 px-6 py-16 md:grid-cols-4">
         <div className="md:col-span-1">
-          <div className="font-display text-base font-semibold">ABM Dynamic Programs</div>
-          <p className="mt-3 max-w-xs text-sm text-muted-foreground">
+          <img src={logo.url} alt="ABM Dynamic Programs" className="h-9 w-auto" />
+          <p className="mt-4 max-w-xs text-sm text-muted-foreground">
             Engineering digital solutions that drive measurable business growth.
           </p>
           <p className="mt-4 text-xs text-muted-foreground">

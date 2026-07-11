@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import logo from "@/assets/abm-logo.png.asset.json";
 
 const nav = [
   { to: "/services", label: "Services" },
@@ -15,11 +16,8 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-white/5 bg-background/60 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-        <Link to="/" className="flex items-center gap-2 font-display text-sm font-semibold tracking-tight">
-          <span className="grid h-7 w-7 place-items-center rounded-md bg-[image:var(--gradient-primary)] text-primary-foreground shadow-[var(--shadow-glow)]">
-            <span className="text-[10px] font-bold">A</span>
-          </span>
-          ABM Dynamic Programs
+        <Link to="/" className="flex items-center gap-2" aria-label="ABM Dynamic Programs — Home">
+          <img src={logo.url} alt="ABM Dynamic Programs" className="h-8 w-auto md:h-9" />
         </Link>
         <nav className="hidden items-center gap-8 md:flex">
           {nav.map((n) => (
