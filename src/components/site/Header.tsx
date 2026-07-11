@@ -16,8 +16,9 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-white/5 bg-background/60 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-        <Link to="/" className="flex items-center gap-2" aria-label="ABM Dynamic Programs — Home">
-          <img src={logo.url} alt="ABM Dynamic Programs" className="h-8 w-auto md:h-9" />
+        <Link to="/" className="flex items-center gap-2 font-display text-sm font-semibold tracking-tight">
+          <img src={logo.url} alt="" className="h-8 w-auto md:h-9" />
+          ABM Dynamic Programs
         </Link>
         <nav className="hidden items-center gap-8 md:flex">
           {nav.map((n) => (
