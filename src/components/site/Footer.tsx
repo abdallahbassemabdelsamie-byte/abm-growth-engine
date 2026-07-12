@@ -34,7 +34,8 @@ export function Footer() {
         <div>
           <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">{t("footer.contact")}</div>
           <ul className="mt-4 space-y-2 text-sm">
-            <li><a href="mailto:hello@abm-programs.com" className="text-muted-foreground hover:text-foreground">hello@abm-programs.com</a></li>
+            <li><a href="mailto:info@abm-programs.com" className="text-muted-foreground hover:text-foreground">info@abm-programs.com</a></li>
+            <li><a href="tel:+201099735066" className="text-muted-foreground hover:text-foreground">+20 109 973 5066</a></li>
             <li><a href="https://abm-programs.com" className="text-muted-foreground hover:text-foreground">abm-programs.com</a></li>
           </ul>
           <Link to="/contact" className="mt-4 inline-flex text-sm text-foreground underline underline-offset-4 decoration-primary/60 hover:decoration-primary">
