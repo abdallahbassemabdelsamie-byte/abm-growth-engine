@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Section, SectionHeading, GradientButton } from "@/components/site/primitives";
-import { Mail, MapPin, Globe, Phone } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { useT } from "@/i18n/context";
 
 export const Route = createFileRoute("/contact")({
