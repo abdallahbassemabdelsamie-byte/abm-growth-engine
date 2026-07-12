@@ -11,7 +11,8 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 // step) we switch to nitro's `static` preset + TanStack Start prerender so the
 // build output is plain HTML/CSS/JS that any static host can serve.
 const IS_LOVABLE_SANDBOX =
-  !!process.env.LOVABLE_DEV_SERVER || !!process.env.LOVABLE_SANDBOX;
+  process.env.LOVABLE_SANDBOX === "1" ||
+  !!process.env.DEV_SERVER__PROJECT_PATH;
 
 export default defineConfig({
   ...(IS_LOVABLE_SANDBOX
