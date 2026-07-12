@@ -90,6 +90,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:description", content: "Premium web development, UI/UX design, SEO, and digital marketing for businesses that want to grow online." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "theme-color", content: "#0a0a1a" },
+      { name: "robots", content: "index, follow" },
     ],
     links: [
       {
@@ -100,6 +102,28 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "ABM Dynamic Programs",
+          url: "https://abm-programs.com",
+          email: "info@abm-programs.com",
+          telephone: "+20 109 973 5066",
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "Hurghada",
+            addressRegion: "Red Sea Governorate",
+            addressCountry: "EG",
+          },
+          areaServed: "Worldwide",
+          slogan: "Engineering Digital Solutions That Drive Business Growth",
+          sameAs: [],
+        }),
+      },
     ],
   }),
   shellComponent: RootShell,
