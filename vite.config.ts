@@ -6,17 +6,22 @@
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
+// The Lovable sandbox forces the `cloudflare-module` nitro preset so previews
+// keep working. Outside the sandbox (e.g. GitHub Actions, SiteGround build
+// step) we switch to nitro's `static` preset + TanStack Start prerender so the
+// build output is plain HTML/CSS/JS that any static host can serve.
+const IS_LOVABLE_SANDBOX =
+  !!process.env.LOVABLE_DEV_SERVER || !!process.env.LOVABLE_SANDBOX;
+
 export default defineConfig({
-  // Build to a fully static site so the output can be uploaded to any
-  // shared host (SiteGround, GitHub Pages, Netlify, etc.). Nitro's `static`
-  // preset prerenders every route into plain HTML files.
-  nitro: { preset: "static" },
-  tanstackStart: {
-    // Prerender every route to static HTML so the build output can be deployed
-    // to any static host (SiteGround, GitHub Pages, Netlify, etc.). crawlLinks
-    // follows internal <Link>/<a> tags so we don't have to enumerate paths.
-    pages: [
-      { path: "/", prerender: { enabled: true, crawlLinks: true } },
-    ],
-  },
+  ...(IS_LOVABLE_SANDBOX
+    ? {}
+    : {
+        nitro: { preset: "static" },
+        tanstackStart: {
+          pages: [
+            { path: "/", prerender: { enabled: true, crawlLinks: true } },
+          ],
+        },
+      }),
 });
