@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Section, SectionHeading, GradientButton } from "@/components/site/primitives";
-import { Mail, MapPin, Globe } from "lucide-react";
+import { Mail, MapPin, Globe, Phone } from "lucide-react";
 import { useT } from "@/i18n/context";
 
 export const Route = createFileRoute("/contact")({
@@ -33,7 +33,8 @@ function ContactPage() {
       <Section className="pt-0">
         <div className="grid gap-8 md:grid-cols-5">
           <div className="md:col-span-2 space-y-4">
-            <InfoRow icon={Mail} title={t("contact.email")} value="hello@abm-programs.com" href="mailto:hello@abm-programs.com" />
+            <InfoRow icon={Mail} title={t("contact.email")} value="info@abm-programs.com" href="mailto:info@abm-programs.com" />
+            <InfoRow icon={Phone} title={t("contact.phone")} value="+20 109 973 5066" href="tel:+201099735066" />
             <InfoRow icon={Globe} title={t("contact.website")} value="abm-programs.com" href="https://abm-programs.com" />
             <InfoRow icon={MapPin} title={t("contact.studio")} value={t("contact.studio.value")} />
           </div>
