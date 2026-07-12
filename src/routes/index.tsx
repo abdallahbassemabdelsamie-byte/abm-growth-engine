@@ -70,11 +70,11 @@ function Index() {
                 {t("home.hero.cta2")}
               </GradientButton>
             </div>
-            <div className="mt-16 flex flex-wrap items-center justify-center gap-x-10 gap-y-3 text-xs uppercase tracking-widest text-muted-foreground">
+            <div className="mt-16 flex flex-col items-center justify-center gap-3 text-center text-xs uppercase tracking-widest text-muted-foreground sm:flex-row sm:flex-wrap sm:gap-x-10">
               <span>{t("home.hero.tag1")}</span>
-              <span className="h-1 w-1 rounded-full bg-white/20" />
+              <span className="hidden h-1 w-1 rounded-full bg-white/20 sm:inline-block" />
               <span>{t("home.hero.tag2")}</span>
-              <span className="h-1 w-1 rounded-full bg-white/20" />
+              <span className="hidden h-1 w-1 rounded-full bg-white/20 sm:inline-block" />
               <span>{t("home.hero.tag3")}</span>
             </div>
           </div>
