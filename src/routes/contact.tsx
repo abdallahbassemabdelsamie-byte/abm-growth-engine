@@ -35,7 +35,6 @@ function ContactPage() {
           <div className="md:col-span-2 space-y-4">
             <InfoRow icon={Mail} title={t("contact.email")} value="info@abm-programs.com" href="mailto:info@abm-programs.com" />
             <InfoRow icon={Phone} title={t("contact.phone")} value="+20 109 973 5066" href="tel:+201099735066" />
-            <InfoRow icon={Globe} title={t("contact.website")} value="abm-programs.com" href="https://abm-programs.com" />
             <InfoRow icon={MapPin} title={t("contact.studio")} value={t("contact.studio.value")} />
           </div>
           <form
