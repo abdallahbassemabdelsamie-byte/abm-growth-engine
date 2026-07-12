@@ -7,6 +7,10 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
+  // Build to a fully static site so the output can be uploaded to any
+  // shared host (SiteGround, GitHub Pages, Netlify, etc.). Nitro's `static`
+  // preset prerenders every route into plain HTML files.
+  nitro: { preset: "static" },
   tanstackStart: {
     // Prerender every route to static HTML so the build output can be deployed
     // to any static host (SiteGround, GitHub Pages, Netlify, etc.). crawlLinks
